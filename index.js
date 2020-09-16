@@ -2,6 +2,7 @@
 function getCharacterByNum(num, json) {
   let characterCounter = 0;
   let indexHash = {};
+  let query = null;
 
   for (let [index, book] of json.entries()) {
     characterCounter += book.characters.length;
@@ -16,8 +17,9 @@ function getCharacterByNum(num, json) {
   characterCounter = 0;
   // console.log(indexHash.greater, indexHash.lesser, characterCounter)
 
-  let query = null;
+  
 
+if (indexHash.greater) {
   json[indexHash.lesser].characters.forEach((charLink) => {
     characterCounter += 1;
     //console.log(characterCounter, charLink)
@@ -29,10 +31,14 @@ function getCharacterByNum(num, json) {
     //console.log(characterCounter, charLink)
     if (characterCounter === num) query = charLink;
   });
+}
+  
 
 
 
   if (query) return `This is the link for the ${num}th character ${query}`;
+
+  else return query;
 
 
 }
@@ -48,7 +54,7 @@ function fetchBooks() {
     renderBooks(jsonObj);
     console.log(jsonObj)
 
-    console.log(getCharacterByNum(1670, jsonObj))
+    console.log(getCharacterByNum(16700, jsonObj))
   });
 
 
