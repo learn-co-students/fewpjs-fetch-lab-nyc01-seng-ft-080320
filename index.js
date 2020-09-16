@@ -1,28 +1,32 @@
-// https://anapioficeandfire.com/api/characters/1909 -- char 400 
+
 function getCharacterByNum(num, json) {
   let characterCounter = 0;
+  let indexHash = {};
   let query = null;
-  let foundBook = null;
-  
-  for (let [index, book] of json.entries()) {
 
+  for (let [index, book] of json.entries()) {
     characterCounter += book.characters.length;
-  
+    // console.log(characterCounter, index);
+
     if (characterCounter >= num) {
-        foundBook = index;
-        break;
+      indexHash.greater = index;
+      indexHash.lesser = Math.abs(index - 1);
+      break;
     }
   };
-
-  console.log(foundBook)
   characterCounter = 0;
   // console.log(indexHash.greater, indexHash.lesser, characterCounter)
 
-  console
+  
 
-if (foundBook || foundBook === 0) {
+if (indexHash.greater || indexHash.greater === 0) {
+  json[indexHash.lesser].characters.forEach((charLink) => {
+    characterCounter += 1;
+    //console.log(characterCounter, charLink)
+    if (characterCounter === num) query = charLink;
+  });
 
-  json[foundBook].characters.forEach((charLink) => {
+  json[indexHash.greater].characters.forEach((charLink) => {
     characterCounter += 1;
     //console.log(characterCounter, charLink)
     if (characterCounter === num) query = charLink;
@@ -47,7 +51,7 @@ function fetchBooks() {
     renderBooks(jsonObj);
     console.log(jsonObj)
 
-    console.log(getCharacterByNum(600, jsonObj))
+    console.log(getCharacterByNum(167, jsonObj))
   });
 
 
