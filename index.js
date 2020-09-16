@@ -15,20 +15,20 @@ function getCharacterByNum(num, json) {
     }
   };
   characterCounter = 0;
-  // console.log(indexHash.greater, indexHash.lesser, characterCounter)
+  
 
   
 
 if (indexHash.greater || indexHash.greater === 0) {
   json[indexHash.lesser].characters.forEach((charLink) => {
     characterCounter += 1;
-    //console.log(characterCounter, charLink)
+ 
     if (characterCounter === num) query = charLink;
   });
 
   json[indexHash.greater].characters.forEach((charLink) => {
     characterCounter += 1;
-    //console.log(characterCounter, charLink)
+
     if (characterCounter === num) query = charLink;
   });
 }
@@ -51,8 +51,9 @@ function fetchBooks() {
     renderBooks(jsonObj);
     console.log(jsonObj)
 
-    console.log(getCharacterByNum(1799, jsonObj))
-    console.log(getCharacterByNum(12, jsonObj))
+    console.log('Test 1: ', getCharacterByNum(1799, jsonObj))
+    console.log('Test 2: ',getCharacterByNum(12, jsonObj))
+    console.log('Test 3(null): ',getCharacterByNum(1800, jsonObj))
   });
 
 
