@@ -1,6 +1,59 @@
-function fetchBooks() {
+
+function getCharacterByNum(num, json) {
+  let characterCounter = 0;
+  let indexHash = {};
+
+  for (let [index, book] of json.entries()) {
+    characterCounter += book.characters.length;
+    // console.log(characterCounter, index);
+
+    if (characterCounter >= num) {
+      indexHash.greater = index;
+      indexHash.lesser = Math.abs(index - 1);
+      break;
+    }
+  };
+  characterCounter = 0;
+  // console.log(indexHash.greater, indexHash.lesser, characterCounter)
+
+  let query = null;
+
+  json[indexHash.lesser].characters.forEach((charLink) => {
+    characterCounter += 1;
+    //console.log(characterCounter, charLink)
+    if (characterCounter === num) query = charLink;
+  });
+
+  json[indexHash.greater].characters.forEach((charLink) => {
+    characterCounter += 1;
+    //console.log(characterCounter, charLink)
+    if (characterCounter === num) query = charLink;
+  });
+
+
+
+  if (query) return `This is the link for the ${num}th character ${query}`;
+
 
 }
+
+
+
+
+function fetchBooks() {
+
+  return fetch('https://anapioficeandfire.com/api/books').then(response => response.json())
+  .then(jsonObj => {
+
+    renderBooks(jsonObj);
+    console.log(jsonObj)
+
+    console.log(getCharacterByNum(1670, jsonObj))
+  });
+
+
+}
+
 
 function renderBooks(books) {
   const main = document.querySelector('main')
@@ -11,6 +64,11 @@ function renderBooks(books) {
   })
 }
 
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
   fetchBooks()
 })
+
