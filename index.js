@@ -21,15 +21,17 @@ function getCharacterByNum(num, json) {
 
 if (indexHash.greater || indexHash.greater === 0) {
   json[indexHash.lesser].characters.forEach((charLink) => {
-    characterCounter += 1;
+    
  
     if (characterCounter === num) query = charLink;
+    characterCounter += 1;
   });
 
   json[indexHash.greater].characters.forEach((charLink) => {
-    characterCounter += 1;
+    
 
     if (characterCounter === num) query = charLink;
+    characterCounter += 1;
   });
 }
   
@@ -51,9 +53,9 @@ function fetchBooks() {
     renderBooks(jsonObj);
     console.log(jsonObj)
 
-    console.log('Test 1: ', getCharacterByNum(1799, jsonObj))
+    console.log('Test 1: ', getCharacterByNum(1798, jsonObj))
     console.log('Test 2: ',getCharacterByNum(12, jsonObj))
-    console.log('Test 3(null): ',getCharacterByNum(1800, jsonObj))
+    console.log('Test 3(null): ',getCharacterByNum(1799, jsonObj))
   });
 
 
