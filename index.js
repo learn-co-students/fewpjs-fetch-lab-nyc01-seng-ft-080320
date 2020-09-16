@@ -5,39 +5,37 @@ function getCharacterByNum(num, json) {
   let query = null;
 
   for (let [index, book] of json.entries()) {
-    characterCounter += book.characters.length;
-    // console.log(characterCounter, index);
 
+    characterCounter += book.characters.length;
+    
     if (characterCounter >= num) {
       indexHash.greater = index;
       indexHash.lesser = Math.abs(index - 1);
       break;
     }
+
   };
+
   characterCounter = 0;
   
+  if (indexHash.greater || indexHash.greater === 0) {
+    json[indexHash.lesser].characters.forEach((charLink) => {
+      
+      if (characterCounter === num) query = charLink;
+      characterCounter += 1;
 
+    });
+
+    json[indexHash.greater].characters.forEach((charLink) => {
+      
+      if (characterCounter === num) query = charLink;
+      characterCounter += 1;
+
+    });
+  }
   
-
-if (indexHash.greater || indexHash.greater === 0) {
-  json[indexHash.lesser].characters.forEach((charLink) => {
-    
- 
-    if (characterCounter === num) query = charLink;
-    characterCounter += 1;
-  });
-
-  json[indexHash.greater].characters.forEach((charLink) => {
-    
-
-    if (characterCounter === num) query = charLink;
-    characterCounter += 1;
-  });
-}
-  
-
   if (query) return `This is the link for the ${num}th character ${query}`;
-
+  
   else return query;
 
 }
