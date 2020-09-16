@@ -51,7 +51,8 @@ function fetchBooks() {
     renderBooks(jsonObj);
     console.log(jsonObj)
 
-    console.log(getCharacterByNum(167, jsonObj))
+    console.log(getCharacterByNum(1799, jsonObj))
+    console.log(getCharacterByNum(12, jsonObj))
   });
 
 
