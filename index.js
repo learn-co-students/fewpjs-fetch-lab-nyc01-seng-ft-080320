@@ -1,8 +1,7 @@
-
+// my search
 function getCharacterByNum(num, json) {
   let characterCounter = 0
   let indexHash = {};
-
   
   for (let [index, book] of json.entries()) {
     
@@ -17,12 +16,12 @@ function getCharacterByNum(num, json) {
     }
   };
 
-  
   if (indexHash.greater || indexHash.greater === 0) {
 
     return `link for char ${num} ${json[indexHash.greater].characters[indexHash.lesser]}`
+
   }
-  
+   
   return null;
 
 }
