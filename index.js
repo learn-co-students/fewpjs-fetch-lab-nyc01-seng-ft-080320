@@ -1,47 +1,31 @@
 
 function getCharacterByNum(num, json) {
-  let characterCounter = 0;
+  let characterCounter = 0
   let indexHash = {};
-  let query = null;
 
+  
   for (let [index, book] of json.entries()) {
-
+    
     characterCounter += book.characters.length;
+    console.log(characterCounter, book.characters.length, num)
     
     if (characterCounter >= num) {
       indexHash.greater = index;
-      indexHash.lesser = Math.abs(index - 1);
+      console.log('leaves on index', indexHash.greater)
+      indexHash.lesser = num - (characterCounter - book.characters.length + 1);
       break;
     }
-
   };
 
-  characterCounter = 0;
   
   if (indexHash.greater || indexHash.greater === 0) {
-    json[indexHash.lesser].characters.forEach((charLink) => {
-      
-      if (characterCounter === num) query = charLink;
-      characterCounter += 1;
 
-    });
-
-    json[indexHash.greater].characters.forEach((charLink) => {
-      
-      if (characterCounter === num) query = charLink;
-      characterCounter += 1;
-
-    });
+    return `link for char ${num} ${json[indexHash.greater].characters[indexHash.lesser]}`
   }
   
-  if (query) return `This is the link for the ${num}th character ${query}`;
-  
-  else return query;
+  return null;
 
 }
-
-
-
 
 function fetchBooks() {
 
@@ -51,12 +35,10 @@ function fetchBooks() {
     renderBooks(jsonObj);
     console.log(jsonObj)
 
-    console.log('Test 1: ', getCharacterByNum(1798, jsonObj))
+    console.log('Test 1: ', getCharacterByNum(1200, jsonObj))
     console.log('Test 2: ',getCharacterByNum(12, jsonObj))
-    console.log('Test 3(null): ',getCharacterByNum(1799, jsonObj))
+    console.log('Test 3(null): ',getCharacterByNum(4657, jsonObj))
   });
-
-
 }
 
 
@@ -68,9 +50,6 @@ function renderBooks(books) {
     main.appendChild(h2)
   })
 }
-
-
-
 
 
 document.addEventListener('DOMContentLoaded', function() {
